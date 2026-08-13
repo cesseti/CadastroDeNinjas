@@ -1,7 +1,10 @@
-package dev.java10x.CadastroDeNinjas;
+package dev.java10x.CadastroDeNinjas.Ninja;
 
 
+import dev.java10x.CadastroDeNinjas.Missao.MissaoModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 //Entity transforma a classe em tabela e @Table só da o nome
 @Entity
@@ -15,6 +18,10 @@ public class NinjaModel {
     private String nome;
     private String email;
     private int idade;
+
+    @ManyToOne
+    @JoinColumn(name = "missao_id")
+    private MissaoModel missao;
 
     public NinjaModel() {
     }
