@@ -3,12 +3,18 @@ package dev.java10x.CadastroDeNinjas.Ninja;
 
 import dev.java10x.CadastroDeNinjas.Missao.MissaoModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 //Entity transforma a classe em tabela e @Table só da o nome
 @Entity
 @Table(name = "tb_cadastro")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NinjaModel {
 
 //@Id usado com @GeneratedValue para dizer que o primeiro atributo abaixo é o id e vai ser incrementado do 1 em diante
@@ -23,36 +29,4 @@ public class NinjaModel {
     @JoinColumn(name = "missao_id")
     private MissaoModel missao;
 
-    public NinjaModel() {
-    }
-
-    public NinjaModel(String nome, String email, int idade) {
-        this.nome = nome;
-        this.email = email;
-        this.idade = idade;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
 }
