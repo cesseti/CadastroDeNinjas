@@ -24,7 +24,7 @@ public class MissaoController {
 
 
     //Alterar missao (Update)
-    @PutMapping("/editarnmissao")
+    @PutMapping("/editarmissao")
     public String editarMissao() {
         return ("missao editada!");
     }
