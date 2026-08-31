@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class NinjaModel {
 
-//@Id usado com @GeneratedValue para dizer que o primeiro atributo abaixo é o id e vai ser incrementado do 1 em diante
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +26,9 @@ public class NinjaModel {
 
     @Column(unique = true)
     private String email;
+
+    @Column(name = "rank")
+    private String rank;
 
     @Column(name = "idade")
     private int idade;
