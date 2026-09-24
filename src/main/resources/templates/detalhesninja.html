@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Ninja</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #0f1117;
+        color: #f1f1f1;
+        min-height: 100vh;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        width: 100%;
+        max-width: 1000px;
+        margin-bottom: 30px;
+        font-size: 32px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    body > div {
+        width: 100%;
+        max-width: 1000px;
+        padding: 30px;
+        background: #171a23;
+        border: 1px solid #292e3a;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    h2 {
+        margin-bottom: 25px;
+        font-size: 25px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    p {
+        margin-bottom: 14px;
+        padding: 14px 18px;
+        background: #1d212b;
+        border: 1px solid #292e3a;
+        border-radius: 9px;
+        color: #d8dce5;
+    }
+
+    strong {
+        color: #858d9d;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    p span {
+        color: #e4e7ec;
+        margin-left: 5px;
+    }
+
+    h3 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 18px;
+        color: #ffffff;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #1d212b;
+        border: 1px solid #292e3a;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    th {
+        padding: 16px 18px;
+        text-align: left;
+        background: #20242f;
+        color: #8f97a7;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        border-bottom: 1px solid #292e3a;
+    }
+
+    td {
+        padding: 17px 18px;
+        color: #d8dce5;
+        font-size: 14px;
+        border-bottom: 1px solid #292e3a;
+    }
+
+    tbody tr {
+        transition: background 0.2s ease;
+    }
+
+    tbody tr:hover {
+        background: #242934;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    body > a {
+        display: inline-block;
+        width: 100%;
+        max-width: 1000px;
+        margin-top: 20px;
+        padding: 12px 17px;
+
+        background: #171a23;
+        border: 1px solid #292e3a;
+        border-radius: 8px;
+
+        color: #aeb5c2;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+
+        transition: all 0.2s ease;
+    }
+
+    body > a:hover {
+        background: #20242f;
+        color: #ffffff;
+        border-color: #3a4150;
+    }
+
+    @media (max-width: 700px) {
+        body {
+            padding: 25px 15px;
+        }
+
+        h1 {
+            font-size: 26px;
+        }
+
+        body > div {
+            padding: 20px;
+        }
+
+        table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+    }
+    </style>
+</head>
+<body>
+<h1>Detalhes do Ninja</h1>
+<div>
+    <h2 th:text="${ninja.nome}"></h2>
+    <p><strong>Email:</strong> <span th:text="${ninja.email}"></span></p>
+    <p><strong>Idade:</strong> <span th:text="${ninja.idade}"></span></p>
+    <p><strong>Rank:</strong> <span th:text="${ninja.rank}"></span></p>
+
+    <h3>Missão:</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Dificuldade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="missao : ${ninja.missao}">
+            <td th:text="${missao.nome}"></td>
+            <td th:text="${missao.dificuldade}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="/ninja/ui/listar">Voltar para a lista de ninjas</a>
+</body>
+</html>

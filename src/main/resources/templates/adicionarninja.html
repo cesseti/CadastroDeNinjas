@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adicionar Ninja</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <style>
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #0f1117;
+        color: #f1f1f1;
+        min-height: 100vh;
+        padding: 50px 20px;
+    }
+
+    /* Título */
+
+    h1 {
+        max-width: 600px;
+        margin: 0 auto 30px;
+        font-size: 32px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    /* Container do formulário */
+
+    .form-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+
+        background: #171a23;
+        border: 1px solid #292e3a;
+        border-radius: 14px;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Mensagem do Thymeleaf */
+
+    .mensagem {
+        margin-bottom: 20px;
+        padding: 12px 15px;
+
+        background: rgba(167, 139, 250, 0.1);
+        border: 1px solid rgba(167, 139, 250, 0.3);
+        border-radius: 8px;
+
+        color: #c4b5fd;
+        font-size: 14px;
+    }
+
+    /* Formulário */
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Labels */
+
+    label {
+        margin-bottom: 8px;
+
+        color: #9da5b4;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    /* Inputs */
+
+    input {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 13px 15px;
+
+        background: #1d212b;
+        border: 1px solid #292e3a;
+        border-radius: 8px;
+
+        color: #ffffff;
+        font-size: 14px;
+
+        outline: none;
+
+        transition: border-color 0.2s ease,
+                    background 0.2s ease,
+                    box-shadow 0.2s ease;
+    }
+
+    /* Placeholder */
+
+    input::placeholder {
+        color: #646c7a;
+    }
+
+    /* Input selecionado */
+
+    input:focus {
+        background: #20242f;
+        border-color: #6d5bb3;
+        box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.08);
+    }
+
+    /* Botão */
+
+    button {
+        width: 100%;
+        margin-top: 5px;
+        padding: 13px 18px;
+
+        border: none;
+        border-radius: 8px;
+
+        background: #7c5cff;
+        color: #ffffff;
+
+        font-size: 14px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: background 0.2s ease,
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+    }
+
+    button:hover {
+        background: #6d4ff0;
+        box-shadow: 0 5px 15px rgba(124, 92, 255, 0.2);
+    }
+
+    button:active {
+        transform: scale(0.98);
+    }
+
+    /* Link voltar */
+
+    .form-container > a {
+        display: block;
+        width: fit-content;
+
+        margin: 20px auto 0;
+
+        color: #8f97a7;
+        text-decoration: none;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        transition: color 0.2s ease;
+    }
+
+    .form-container > a:hover {
+        color: #ffffff;
+    }
+
+    /* Responsividade */
+
+    @media (max-width: 700px) {
+
+        body {
+            padding: 30px 15px;
+        }
+
+        h1 {
+            font-size: 26px;
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+    }
+
+    </style>
+</head>
+<body>
+<h1>Adicionar Novo Ninja</h1>
+<div class="form-container">
+    <div th:if="${mensagem}" class="mensagem" th:text="${mensagem}"></div>
+    <form th:action="@{/ninja/ui/salvar}" th:object="${ninja}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required />
+
+
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" th:field="*{idade}" required />
+
+        <label for="rank">Rank:</label>
+        <input type="text" id="rank" th:field="*{rank}" />
+
+        <button type="submit">Cadastrar Ninja</button>
+    </form>
+    <a th:href="@{/ninja/ui/listar}">Voltar para a lista de ninjas</a>
+</div>
+</body>
+</html>
