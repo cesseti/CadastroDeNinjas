@@ -1,0 +1,221 @@
+<!
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Tabela de Missões</title>
+  <style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #0f1117;
+        color: #f1f1f1;
+        min-height: 100vh;
+        padding: 50px;
+    }
+
+    /* Container principal */
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        width: 100%;
+        max-width: 1200px;
+        margin-bottom: 30px;
+        font-size: 32px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    /* Tabela */
+    table {
+        width: 100%;
+        max-width: 1200px;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #171a23;
+        border: 1px solid #292e3a;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Cabeçalho */
+    thead {
+        background: #1e222d;
+    }
+
+    th {
+        padding: 18px 20px;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        color: #9da5b4;
+        border-bottom: 1px solid #292e3a;
+    }
+
+    /* Linhas */
+    td {
+        padding: 18px 20px;
+        font-size: 14px;
+        color: #d8dce5;
+        border-bottom: 1px solid #242934;
+    }
+
+    tbody tr {
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    tbody tr:hover {
+        background: #1d212b;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* ID */
+    td:first-child {
+        color: #858d9d;
+        font-weight: 600;
+    }
+
+    /* Nome */
+    td:nth-child(2) {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    /* Rank */
+    td:nth-child(5) {
+        color: #a78bfa;
+        font-weight: 600;
+    }
+
+    /* Missão */
+    td:nth-child(6) {
+        color: #b8beca;
+        line-height: 1.5;
+    }
+
+    /* Links / ações */
+    td:last-child {
+        white-space: nowrap;
+    }
+
+    td:last-child a {
+        display: inline-block;
+        margin-right: 8px;
+        padding: 7px 12px;
+        border-radius: 7px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    /* Ver detalhes */
+    td:last-child a:nth-child(1) {
+        color: #8ab4ff;
+        background: rgba(79, 140, 255, 0.1);
+    }
+
+    td:last-child a:nth-child(1):hover {
+        background: rgba(79, 140, 255, 0.2);
+    }
+
+    /* Editar */
+    td:last-child a:nth-child(2) {
+        color: #a78bfa;
+        background: rgba(167, 139, 250, 0.1);
+    }
+
+    td:last-child a:nth-child(2):hover {
+        background: rgba(167, 139, 250, 0.2);
+    }
+
+    /* Deletar */
+    td:last-child a:nth-child(3) {
+        color: #f87171;
+        background: rgba(248, 113, 113, 0.1);
+    }
+
+    td:last-child a:nth-child(3):hover {
+        background: rgba(248, 113, 113, 0.2);
+    }
+
+    /* Responsividade */
+    @media (max-width: 900px) {
+        body {
+            padding: 25px 15px;
+        }
+
+        h1 {
+            font-size: 26px;
+        }
+
+        table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+        }
+    }
+  </style>
+</head>
+<body>
+<h1>Lista de Missões</h1>
+<a class="btn-adicionar" th:href="@{/missao/ui/adicionar}">Adicionar Nova Missão</a>
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>Dificuldade</th>
+    <th>Ninjas</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each ="missao: ${missoes}">
+
+    <td th:text="${missao.id}"></td>
+    <td th:text="${missao.nome}"></td>
+    <td th:text="${missao.dificuldade}"></td>
+    <td th:text="${missao.ninjas}"></td>
+    <td>
+      <span th:if="${not #lists.isEmpty(missao.ninjas)}"
+            th:each="ninja : ${missao.ninjas}"
+            th:text="${ninja.nome + ', '}">
+      </span>
+
+        <span th:if="${#lists.isEmpty(missao.ninjas)}">
+          Sem Ninjas cadastrados para a missão
+    </span>
+    </td>
+
+    <td>
+      <a th:href="@{/missao/ui/buscar/{id}(id=${missao.id})}">Ver detalhes</a>
+      <a th:href="@{/missao/ui/#/{id}(id=${missao.id})}">Editar</a>
+      <a th:href="@{/missao/ui/deletar/{id}(id=${missao.id})}">Deletar</a>
+    </td>
+
+  </tr>
+  </tbody>
+
+</table>
+</body>
+</html>

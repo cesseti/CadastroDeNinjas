@@ -29,7 +29,6 @@ public class MissaoController {
                 .body("Missão " + novaMissao.getNome() + " cadastrada com sucesso!");
     }
 
-    //Mostrar todos as missoes (Read)
     @GetMapping("/listar")
     public ResponseEntity<List<MissaoDTO>> listarMissoes() {
         List<MissaoDTO> missoes = missaoService.listar();
